@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineHitss", "CineHitss\CineHitss.csproj", "{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineHitssApi", "CineHitssApi\CineHitssApi.csproj", "{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF9B25D6-C0CD-4E0A-A486-EE76BCC0E2C5}
+	EndGlobalSection
+EndGlobal
