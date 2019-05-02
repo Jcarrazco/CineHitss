@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -81,7 +82,7 @@ namespace CineHitssApi
         /// </summary>
         /// <param Nombre de genero a buscar ="_genero"></param>
         /// <returns>Lista de peliculas por genero</returns>
-        public IEnumerable<Pelicula> GetPeliculas(string _genero)
+        public IEnumerable<Pelicula> GetPeliculasgen(string _genero)
         {
             Genero Gen = new Genero();
             IEnumerable<Pelicula> _peliculas = new List<Pelicula>();
@@ -97,6 +98,58 @@ namespace CineHitssApi
             }
 
             return _peliculas;
+        }
+
+        /// <summary>
+        /// Metodo de Filtro por Clasificacion
+        /// </summary>
+        /// <param Nombre de la clasificacion="_clasificacion"></param>
+        /// <returns>regresa lista de peliculas que coinciden</returns>
+        public IEnumerable<Pelicula> GetPeliculasClas(string _clasificacion)
+        {
+            IEnumerable<Pelicula> _peliculas = new List<Pelicula>();
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                _peliculas = context.Peliculas.Where(c => c.Clasification == _clasificacion).ToList();
+            }
+
+
+            return _peliculas;
+        }
+
+        /// <summary>
+        /// Metodo de Filtro por Horario
+        /// </summary>
+        /// <param Nombre de la clasificacion="_clasificacion"></param>
+        /// <returns>regresa lista de peliculas que coinciden</returns>
+        public IEnumerable<Cartelera> GetPeliculasHorario(DateTime _Dia, string _peliculaname)
+        {
+            Pelicula _pelicula = new Pelicula();
+            IEnumerable<Cartelera> _Carteleras = new List<Cartelera>();
+            List<Cartelera> _Cartelerasresult = new List<Cartelera>();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                _pelicula = context.Peliculas.First(c => c.Nombre == _peliculaname);
+                _Carteleras = context.Carteleras.Where(c => c.PeliculaID == _pelicula.id).ToList();
+                foreach (Cartelera cartelera in _Carteleras )
+                {
+                    //Mientras este dentro del dia muestre los horarios que hay(Solo por dia)
+                    if (cartelera.Horario > _Dia && cartelera.Horario < _Dia.AddDays(1))
+                    {
+                        _Cartelerasresult.Add(cartelera);
+                    }
+                }
+            }
+
+
+            return _Cartelerasresult;
         }
     }
 }
