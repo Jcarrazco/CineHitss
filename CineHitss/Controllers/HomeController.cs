@@ -12,7 +12,7 @@ namespace CineHitss.Controllers
         {
             return View();
         }
-
+         
 
     }
 }
