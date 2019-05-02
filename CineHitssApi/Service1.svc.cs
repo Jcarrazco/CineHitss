@@ -12,22 +12,25 @@ namespace CineHitssApi
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+        public User GetUser(string _Username)
         {
-            return string.Format("You entered: {0}", value);
-        }
+            //READ
+            //Creo el objeto que regreso al final
+            User _user = new User();
+            
+            // me permite conectarme al EF solo en lo que dura la funcion
+            using (var context = new CineHitssEntities())
+            {
+               _user = context.Users.First(c => c.Username == _Username);
+                
+            }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return _user;
         }
+        /*
+        public List<objeto> Nombre (string Parametro)
+        {
+            return List<objeto>;
+        }*/
     }
 }

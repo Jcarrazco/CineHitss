@@ -12,14 +12,12 @@ namespace CineHitssApi
     [ServiceContract]
     public interface IService1
     {
-
         [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
+        User GetUser(string _Username);
+        /*
+        [DataContract]
+        List<objeto> Nombre (string Parametro)
+        */
     }
 
 
@@ -27,21 +25,6 @@ namespace CineHitssApi
     [DataContract]
     public class CompositeType
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        
     }
 }
