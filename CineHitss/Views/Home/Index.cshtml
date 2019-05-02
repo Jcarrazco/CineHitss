@@ -4,8 +4,25 @@
 
 <div class="jumbotron">
     <h1>CineHitss</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    
+    <br /> 
+
+    <div id="cuerpo">
+        <form id="form-login" action="" method="post" autocomplete="off">
+            <!--A saber, el atributo for funciona como el id.-->
+            <!--ejemplo <label for="usuario">Usuario:</label>-->
+            <!--required es nuevo en html5, si el campo está vacío te avisa, pero cuidado, no valida la información-->
+            <p><label>Usuario:</label></p>
+            <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
+
+            <p><label>Contraseña:</label></p>
+            <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
+
+            <p id="bot"><input type="submit" id="submit" name="submit" value="Ingresar" class="boton"></p>
+        </form>
+    </div><!--fin cuerpo-->
+
+
 </div>
 
 <div class="row">
