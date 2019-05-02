@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -51,7 +52,7 @@ namespace CineHitssApi
                 context.Configuration.LazyLoadingEnabled = false;
                 context.Configuration.ProxyCreationEnabled = false;
                 _user = context.Users.Find(_UserId);
-                _user.Points =  _points;
+                _user.Points = _points;
                 context.SaveChanges();
             }
             return "Puntos Actualizados" + _points;
@@ -81,7 +82,7 @@ namespace CineHitssApi
         /// </summary>
         /// <param Nombre de genero a buscar ="_genero"></param>
         /// <returns>Lista de peliculas por genero</returns>
-        public IEnumerable<Pelicula> GetPeliculas(string _genero)
+        public IEnumerable<Pelicula> GetPeliculasgen(string _genero)
         {
             Genero Gen = new Genero();
             IEnumerable<Pelicula> _peliculas = new List<Pelicula>();
@@ -99,73 +100,56 @@ namespace CineHitssApi
             return _peliculas;
         }
 
-        public IEnumerable<Cine> GetCinesxCiudad(string _ciudad)
+        /// <summary>
+        /// Metodo de Filtro por Clasificacion
+        /// </summary>
+        /// <param Nombre de la clasificacion="_clasificacion"></param>
+        /// <returns>regresa lista de peliculas que coinciden</returns>
+        public IEnumerable<Pelicula> GetPeliculasClas(string _clasificacion)
         {
-            Ciudade City = new Ciudade();
-            IEnumerable<Cine> _cine = new List<Cine>();
-
+            IEnumerable<Pelicula> _peliculas = new List<Pelicula>();
             using (var context = new CineHitssEntities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
                 context.Configuration.ProxyCreationEnabled = false;
 
-                City = context.Ciudades.First(x => x.Nombre == _ciudad);
-
-                _cine = context.Cines.Where(c => c.CiudadID == City.id).ToList();
+                _peliculas = context.Peliculas.Where(c => c.Clasification == _clasificacion).ToList();
             }
 
-            return _cine;
+
+            return _peliculas;
         }
 
-        public IEnumerable<Pelicula> GetPeliculasxCine(string _location)
-        {
-            Cine cine = new Cine();
-            List<Cartelera> cartelera = new List<Cartelera>();
-
-            IEnumerable<Pelicula> _pelicula = new List<Pelicula>();
-            List<Pelicula> _pelicula2 = new List<Pelicula>();
-
-            using (var context = new CineHitssEntities())
-            {
-                context.Configuration.LazyLoadingEnabled = false;
-                context.Configuration.ProxyCreationEnabled = false;
-
-                cine = context.Cines.First(x => x.Location == _location);
-                cartelera = context.Carteleras.Where(y => y.CineID == cine.id).ToList();
-                _pelicula = context.Peliculas.ToList();
-
-                foreach (Pelicula itemp in _pelicula)
-                {
-                   foreach  (Cartelera item in cartelera)
-                    {
-                        if (itemp.id == item.PeliculaID)
-                        {
-                            _pelicula2.Add(itemp);
-                        }
-                    }
-                }
-                
-            }
-
-            return _pelicula2;
-        }
-
-        public IEnumerable<Cartelera> HorariosPeliculas(string _peliculaname)
+        /// <summary>
+        /// Metodo de Filtro por Horario
+        /// </summary>
+        /// <param Nombre de la clasificacion="_clasificacion"></param>
+        /// <returns>regresa lista de peliculas que coinciden</returns>
+        public IEnumerable<Cartelera> GetPeliculasHorario(DateTime _Dia, string _peliculaname)
         {
             Pelicula _pelicula = new Pelicula();
-            IEnumerable<Cartelera> _cartelera = new List<Cartelera>();
+            IEnumerable<Cartelera> _Carteleras = new List<Cartelera>();
+            List<Cartelera> _Cartelerasresult = new List<Cartelera>();
 
             using (var context = new CineHitssEntities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
                 context.Configuration.ProxyCreationEnabled = false;
 
-                _pelicula = context.Peliculas.First(x => x.Nombre == _peliculaname);
-
-                _cartelera = context.Carteleras.Where(c => c.PeliculaID == _pelicula.id).ToList();
+                _pelicula = context.Peliculas.First(c => c.Nombre == _peliculaname);
+                _Carteleras = context.Carteleras.Where(c => c.PeliculaID == _pelicula.id).ToList();
+                foreach (Cartelera cartelera in _Carteleras )
+                {
+                    //Mientras este dentro del dia muestre los horarios que hay(Solo por dia)
+                    if (cartelera.Horario > _Dia && cartelera.Horario < _Dia.AddDays(1))
+                    {
+                        _Cartelerasresult.Add(cartelera);
+                    }
+                }
             }
 
-            return _cartelera;
+
+            return _Cartelerasresult;
         }
     }
 }

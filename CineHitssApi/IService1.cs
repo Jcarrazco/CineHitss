@@ -22,7 +22,13 @@ namespace CineHitssApi
         Pelicula GetPelicula(string _peliculaName);
 
         [OperationContract]
-        IEnumerable<Pelicula> GetPeliculas(string _genero);
+        IEnumerable<Pelicula> GetPeliculasgen(string _genero);
+
+        [OperationContract]
+        IEnumerable<Pelicula> GetPeliculasClas(string _clasificacion);
+
+        [OperationContract]
+        IEnumerable<Cartelera> GetPeliculasHorario(DateTime _Dia, string _peliculaname);
 
         [OperationContract]
         IEnumerable<Cine> GetCinesxCiudad(string _ciudad);
