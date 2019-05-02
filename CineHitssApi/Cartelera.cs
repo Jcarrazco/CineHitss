@@ -11,7 +11,9 @@ namespace CineHitssApi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Cartelera
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +21,14 @@ namespace CineHitssApi
         {
             this.Historials = new HashSet<Historial>();
         }
-    
+
+        [DataMember]
         public int id { get; set; }
+        [DataMember]
         public System.DateTime Horario { get; set; }
+        [DataMember]
         public int PeliculaID { get; set; }
+        [DataMember]
         public int CineID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

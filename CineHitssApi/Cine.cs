@@ -11,7 +11,9 @@ namespace CineHitssApi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Cine
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +21,12 @@ namespace CineHitssApi
         {
             this.Carteleras = new HashSet<Cartelera>();
         }
-    
+
+        [DataMember]
         public int id { get; set; }
+        [DataMember]
         public string Location { get; set; }
+        [DataMember]
         public int CiudadID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
