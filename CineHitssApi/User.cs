@@ -11,7 +11,9 @@ namespace CineHitssApi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +21,15 @@ namespace CineHitssApi
         {
             this.Historials = new HashSet<Historial>();
         }
-    
+        [DataMember]
         public int id { get; set; }
+        [DataMember]
         public string Username { get; set; }
+        [DataMember]
         public string Password { get; set; }
+        [DataMember]
         public string Email { get; set; }
+        [DataMember]
         public Nullable<int> Points { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
