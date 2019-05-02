@@ -11,11 +11,16 @@ namespace CineHitssApi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class Historial
     {
+        [DataMember]
         public int id { get; set; }
+        [DataMember]
         public int UserID { get; set; }
+        [DataMember]
         public int CarteleraID { get; set; }
     
         public virtual Cartelera Cartelera { get; set; }

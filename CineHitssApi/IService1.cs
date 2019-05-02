@@ -14,17 +14,16 @@ namespace CineHitssApi
     {
         [OperationContract]
         User GetUser(string _Username);
-        /*
-        [DataContract]
-        List<objeto> Nombre (string Parametro)
-        */
+
+        [OperationContract]
+        string AddPointsUser (int _points, int _UserId);
+
+        [OperationContract]
+        Pelicula GetPelicula(string _peliculaName);
+
+        [OperationContract]
+        IEnumerable<Pelicula> GetPeliculas(string _genero);
+
     }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    [DataContract]
-    public class CompositeType
-    {
-        
-    }
 }

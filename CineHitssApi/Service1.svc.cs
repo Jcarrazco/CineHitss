@@ -12,6 +12,11 @@ namespace CineHitssApi
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
+        /// <summary>
+        /// Funcion para obtener un User con el solo username
+        /// </summary>
+        /// <param Nombre de usuario="_Username"></param>
+        /// <returns>Se regresa un objeto User</returns>
         public User GetUser(string _Username)
         {
             //READ
@@ -21,16 +26,77 @@ namespace CineHitssApi
             // me permite conectarme al EF solo en lo que dura la funcion
             using (var context = new CineHitssEntities())
             {
+                //Deshabilite la funcion para que no cargue datos sin relacion
+                context.Configuration.LazyLoadingEnabled = false; 
+                //Deshabilite la funcion para que me permita conectarme al servicio
+                context.Configuration.ProxyCreationEnabled = false;
                _user = context.Users.First(c => c.Username == _Username);
                 
             }
 
             return _user;
         }
-        /*
-        public List<objeto> Nombre (string Parametro)
+
+        /// <summary>
+        /// Funcion para actualizar los puntos actuales
+        /// </summary>
+        /// <param Puntos actualizados="_points"></param>
+        /// <param Id del usuario="_UserId"></param>
+        /// <returns>string de confiarmacion</returns>
+        public string AddPointsUser(int _points, int _UserId)
         {
-            return List<objeto>;
-        }*/
+            User _user = new User();
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+                _user = context.Users.Find(_UserId);
+                _user.Points = _points;
+                context.SaveChanges();
+            }
+            return "Puntos Actualizados" + _points;
+        }
+
+        /// <summary>
+        /// Metodo para obtener pelicula por nombre
+        /// </summary>
+        /// <param Nombre de la pelicula="_peliculaName"></param>
+        /// <returns>objeto de pelicula completo</returns>
+        public Pelicula GetPelicula(string _peliculaName)
+        {
+            Pelicula _pelicula = new Pelicula();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                _pelicula = context.Peliculas.First(c=>c.Nombre == _peliculaName);
+            }
+            return _pelicula;
+        }
+
+        /// <summary>
+        /// Metodo para obtener peliculas por genero
+        /// </summary>
+        /// <param Nombre de genero a buscar ="_genero"></param>
+        /// <returns>Lista de peliculas por genero</returns>
+        public IEnumerable<Pelicula> GetPeliculas(string _genero)
+        {
+            Genero Gen = new Genero();
+            IEnumerable<Pelicula> _peliculas = new List<Pelicula>();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                Gen = context.Generos.First(x => x.Nombre == _genero);
+
+                _peliculas = context.Peliculas.Where(c => c.GeneroID == Gen.id).ToList();
+            }
+
+            return _peliculas;
+        }
     }
 }
