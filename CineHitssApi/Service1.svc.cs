@@ -51,7 +51,7 @@ namespace CineHitssApi
                 context.Configuration.LazyLoadingEnabled = false;
                 context.Configuration.ProxyCreationEnabled = false;
                 _user = context.Users.Find(_UserId);
-                _user.Points = _points;
+                _user.Points =  _points;
                 context.SaveChanges();
             }
             return "Puntos Actualizados" + _points;
@@ -97,6 +97,75 @@ namespace CineHitssApi
             }
 
             return _peliculas;
+        }
+
+        public IEnumerable<Cine> GetCinesxCiudad(string _ciudad)
+        {
+            Ciudade City = new Ciudade();
+            IEnumerable<Cine> _cine = new List<Cine>();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                City = context.Ciudades.First(x => x.Nombre == _ciudad);
+
+                _cine = context.Cines.Where(c => c.CiudadID == City.id).ToList();
+            }
+
+            return _cine;
+        }
+
+        public IEnumerable<Pelicula> GetPeliculasxCine(string _location)
+        {
+            Cine cine = new Cine();
+            List<Cartelera> cartelera = new List<Cartelera>();
+
+            IEnumerable<Pelicula> _pelicula = new List<Pelicula>();
+            List<Pelicula> _pelicula2 = new List<Pelicula>();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                cine = context.Cines.First(x => x.Location == _location);
+                cartelera = context.Carteleras.Where(y => y.CineID == cine.id).ToList();
+                _pelicula = context.Peliculas.ToList();
+
+                foreach (Pelicula itemp in _pelicula)
+                {
+                   foreach  (Cartelera item in cartelera)
+                    {
+                        if (itemp.id == item.PeliculaID)
+                        {
+                            _pelicula2.Add(itemp);
+                        }
+                    }
+                }
+                
+            }
+
+            return _pelicula2;
+        }
+
+        public IEnumerable<Cartelera> HorariosPeliculas(string _peliculaname)
+        {
+            Pelicula _pelicula = new Pelicula();
+            IEnumerable<Cartelera> _cartelera = new List<Cartelera>();
+
+            using (var context = new CineHitssEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                _pelicula = context.Peliculas.First(x => x.Nombre == _peliculaname);
+
+                _cartelera = context.Carteleras.Where(c => c.PeliculaID == _pelicula.id).ToList();
+            }
+
+            return _cartelera;
         }
     }
 }
