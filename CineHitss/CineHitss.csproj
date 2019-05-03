@@ -179,6 +179,7 @@
     <Compile Include="Historial.cs">
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Filtro.cs" />
     <Compile Include="Pelicula.cs">
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
     </Compile>
@@ -273,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
