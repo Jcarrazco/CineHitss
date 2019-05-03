@@ -13,10 +13,10 @@ namespace CineHitss
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CineHitssProxy : DbContext
+    public partial class DataBaseCineHitssEntities : DbContext
     {
-        public CineHitssProxy()
-            : base("name=CineHitssProxy")
+        public DataBaseCineHitssEntities()
+            : base("name=DataBaseCineHitssEntities")
         {
         }
     
