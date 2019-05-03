@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:53797/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CineHitssApi" />
+  <xs:element name="GetUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_Username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetUserResult" nillable="true" type="q1:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_Username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_Password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="LoginUserResult" nillable="true" type="q2:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPointsUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_points" type="xs:int" />
+        <xs:element minOccurs="0" name="_UserId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPointsUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddPointsUserResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPelicula">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_peliculaName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetPeliculaResult" nillable="true" type="q3:Pelicula" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasgen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_genero" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasgenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetPeliculasgenResult" nillable="true" type="q4:ArrayOfPelicula" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasClas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_clasificacion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasClasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetPeliculasClasResult" nillable="true" type="q5:ArrayOfPelicula" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasHorario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_Dia" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="_peliculaname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasHorarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetPeliculasHorarioResult" nillable="true" type="q6:ArrayOfCartelera" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCinesxCiudad">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_ciudad" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCinesxCiudadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetCinesxCiudadResult" nillable="true" type="q7:ArrayOfCine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasxCine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_location" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPeliculasxCineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="GetPeliculasxCineResult" nillable="true" type="q8:ArrayOfPelicula" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HorariosPeliculas">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_peliculaname" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HorariosPeliculasResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CineHitssApi" minOccurs="0" name="HorariosPeliculasResult" nillable="true" type="q9:ArrayOfCartelera" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
