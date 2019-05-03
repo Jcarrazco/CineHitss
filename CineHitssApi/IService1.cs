@@ -16,6 +16,9 @@ namespace CineHitssApi
         User GetUser(string _Username);
 
         [OperationContract]
+        User LoginUser(string _Username, string _Password);
+
+        [OperationContract]
         string AddPointsUser (int _points, int _UserId);
 
         [OperationContract]
