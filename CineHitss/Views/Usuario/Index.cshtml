@@ -48,7 +48,12 @@
     <br />
 
     <h2>Historial</h2>
-    <textarea id="TextArea1" rows="5" cols="30"></textarea>
+    <ul>
+        @foreach (var item in ViewBag.historia)
+        {
+            <li>@item.nombre - @item.horario</li>
+        }
+    </ul>
 
     <br />
 
