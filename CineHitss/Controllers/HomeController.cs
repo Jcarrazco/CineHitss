@@ -13,9 +13,9 @@ namespace CineHitss.Controllers
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
-            var peliculas = context.Peliculas.ToList();
-
-            return View();
+            List<Pelicula> Peliculas = context.Peliculas.ToList();
+            ViewBag.Existep = true;
+            return View(Peliculas);
         }
 
         public ActionResult Login(string usuario, string contrasenia)

@@ -1,55 +1,89 @@
-﻿@{
-    ViewBag.Title = "Bienvenido CineHitss";
+﻿
+@{
+    ViewBag.Title = "CineHitss Bienvenido";
 }
-
-@model List<Pelicula>
-
+@model List<CineHitss.Pelicula>
+<html>
 <head>
     <style>
-        .img{
+        .rowpelicula {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 10px;
+            padding: 10px;
+        }
 
+            .rowpelicula > div {
+                border: 1px solid black;
+                text-align: center;
+                font-size: 30px;
+                background-color:cadetblue;
+            }
+
+        .row {
+            display: grid;
+            grid-template-areas: 'header header header header header header' 'menu main main main main right' 'menu footer footer footer footer footer';
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .column1 {
+            grid-area: right;
+            background-color: skyblue;
+            grid-area: right;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .column2 {
+            grid-area: main;
         }
     </style>
 </head>
-<div class="jumbotron" style="">
+
+<body>
     <h1>CineHitss</h1>
-    
-    <br /> 
 
-    <div id="cuerpo">
-        <div class="row">
-            <div class="column">
-                <form id="form-login" action="@Url.Action("Login", "Home")" method="post" autocomplete="off">
-                    <!--A saber, el atributo for funciona como el id.-->
-                    <!--ejemplo <label for="usuario">Usuario:</label>-->
-                    <!--required es nuevo en html5, si el campo está vacío te avisa, pero cuidado, no valida la información-->
-                    <p><label>Usuario:</label></p>
-                    <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
+    <br />
+    <div class="row">
+        <div class="column1">
+            <form id="form-login" action="@Url.Action("Usuario","Usuario")" method="post" autocomplete="off">
+                <!--A saber, el atributo for funciona como el id.-->
+                <!--ejemplo <label for="usuario">Usuario:</label>-->
+                <!--required es nuevo en html5, si el campo está vacío te avisa, pero cuidado, no valida la información-->
+                <p><label>Usuario:</label></p>
+                <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
 
-                    <p><label>Contraseña:</label></p>
-                    <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
+                <p><label>Contraseña:</label></p>
+                <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
 
-                    <p id="bot"><input type="submit" id="submit" name="submit" value="Ingresar" class="boton"></p>
-                </form>
-            </div>
-            <div class="column" style="background-color:lightsteelblue">
-                
-            </div>
+                <p id="bot"><input type="submit" id="submit" name="submit" value="Ingresar" class="boton"></p>
+
+
+            </form>
         </div>
-    </div><!--fin cuerpo-->
+        <div class="column2">
+            @using (Html.BeginForm("Filtros", "Filtros"))
+            {
+                <div class="rowpelicula">
+                    @if (ViewBag.Existep)
+                    {
+                        foreach (Pelicula p in Model)
+                        {
+                            <div>
+                                <h2>@p.Nombre</h2> <br />
+                                <a href="~/Usuario/Index?var=@p.Nombre">
+                                    <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;">
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </div>
 
 
-</div>
+</body>
 
-<div class="row">
-    <div class="col-md-4">
-        
-        
-    </div>
-    <div class="col-md-4">
-        
-    </div>
-    <div class="col-md-4">
-        
-    </div>
-</div>
+</html>
