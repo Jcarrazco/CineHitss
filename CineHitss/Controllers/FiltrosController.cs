@@ -11,7 +11,12 @@ namespace CineHitss.Controllers
         // GET: Filtros
         public ActionResult Index()
         {
-            return View();
+            using (var context = new CineHitssProxy())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+            }
+                return View();
         }
     }
 }

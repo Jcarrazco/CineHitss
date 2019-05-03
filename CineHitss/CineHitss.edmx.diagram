@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f4cf368124c4a86ad6a217ef3e35d7b" Name="Diagram1">
+        <EntityTypeShape EntityType="CineHitssModel.Cartelera" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.Cine" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.Ciudade" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.Genero" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.Historial" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.Pelicula" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CineHitssModel.User" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="CineHitssModel.fk_CarteleraID" ManuallyRouted="false" />
+        <AssociationConnector Association="CineHitssModel.fk_CineID" ManuallyRouted="false" />
+        <AssociationConnector Association="CineHitssModel.fk_PeliculaID" ManuallyRouted="false" />
+        <AssociationConnector Association="CineHitssModel.fk_CiudadID" ManuallyRouted="false" />
+        <AssociationConnector Association="CineHitssModel.fk_GeneroID" ManuallyRouted="false" />
+        <AssociationConnector Association="CineHitssModel.fk_UserID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
