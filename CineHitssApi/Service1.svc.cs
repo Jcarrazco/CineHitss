@@ -39,6 +39,36 @@ namespace CineHitssApi
         }
 
         /// <summary>
+        /// Metodo de login de usuario
+        /// </summary>
+        /// <param Username del usuario="_Username"></param>
+        /// <param Password del usuario="_Password"></param>
+        /// <returns>si existe regresa el usuario completo si no solo un nombre no valido</returns>
+        public User LoginUser(string _Username, string _Password)
+        {
+            //READ
+            //Creo el objeto que regreso al final
+            User _user = new User();
+
+            // me permite conectarme al EF solo en lo que dura la funcion
+            using (var context = new CineHitssEntities())
+            {
+                //Deshabilite la funcion para que no cargue datos sin relacion
+                context.Configuration.LazyLoadingEnabled = false;
+                //Deshabilite la funcion para que me permita conectarme al servicio
+                context.Configuration.ProxyCreationEnabled = false;
+                _user = context.Users.First(c => c.Username == _Username);
+                if (_user.Password != _Password)
+                {
+                    return new User() { Username = "Usuario No Valido" };
+                }
+
+            }
+
+            return _user;
+        }
+
+        /// <summary>
         /// Funcion para actualizar los puntos actuales
         /// </summary>
         /// <param Puntos actualizados="_points"></param>
@@ -151,10 +181,6 @@ namespace CineHitssApi
 
             return _Cartelerasresult;
         }
-
-
-
-
 
         public IEnumerable<Cine> GetCinesxCiudad(string _ciudad)
         {
