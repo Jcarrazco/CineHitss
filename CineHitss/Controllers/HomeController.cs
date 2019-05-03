@@ -34,7 +34,7 @@ namespace CineHitss.Controllers
 
             }
 
-            return RedirectToAction("Index", "Filtros", null);
+            return RedirectToAction("Index", "Usuario", null);
         }
          
 

@@ -179,6 +179,7 @@
     <Compile Include="Historial.cs">
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Filtro.cs" />
     <Compile Include="Models\lala.cs" />
     <Compile Include="Pelicula.cs">
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
