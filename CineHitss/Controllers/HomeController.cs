@@ -8,14 +8,14 @@ namespace CineHitss.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(List<Pelicula> Peliculas)
         {
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
-            var peliculas = context.Peliculas.ToList();
+            Peliculas = context.Peliculas.ToList();
 
-            return View();
+            return View(Peliculas);
         }
 
         public ActionResult Login(string usuario, string contrasenia)
