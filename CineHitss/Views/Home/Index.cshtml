@@ -2,24 +2,40 @@
     ViewBag.Title = "Bienvenido CineHitss";
 }
 
-<div class="jumbotron">
+@model List<Pelicula>
+
+<head>
+    <style>
+        .img{
+
+        }
+    </style>
+</head>
+<div class="jumbotron" style="">
     <h1>CineHitss</h1>
     
     <br /> 
 
     <div id="cuerpo">
-        <form id="form-login" action="@Url.Action("Login", "Home")" method="post" autocomplete="off">
-            <!--A saber, el atributo for funciona como el id.-->
-            <!--ejemplo <label for="usuario">Usuario:</label>-->
-            <!--required es nuevo en html5, si el campo está vacío te avisa, pero cuidado, no valida la información-->
-            <p><label>Usuario:</label></p>
-            <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
+        <div class="row">
+            <div class="column">
+                <form id="form-login" action="@Url.Action("Login", "Home")" method="post" autocomplete="off">
+                    <!--A saber, el atributo for funciona como el id.-->
+                    <!--ejemplo <label for="usuario">Usuario:</label>-->
+                    <!--required es nuevo en html5, si el campo está vacío te avisa, pero cuidado, no valida la información-->
+                    <p><label>Usuario:</label></p>
+                    <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
 
-            <p><label>Contraseña:</label></p>
-            <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
+                    <p><label>Contraseña:</label></p>
+                    <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
 
-            <p id="bot"><input type="submit" id="submit" name="submit" value="Ingresar" class="boton"></p>
-        </form>
+                    <p id="bot"><input type="submit" id="submit" name="submit" value="Ingresar" class="boton"></p>
+                </form>
+            </div>
+            <div class="column" style="background-color:lightsteelblue">
+                
+            </div>
+        </div>
     </div><!--fin cuerpo-->
 
 
