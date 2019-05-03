@@ -10,7 +10,7 @@ namespace CineHitss.Controllers
     public class FiltrosController : Controller
     {
         // GET: Filtros
-        public ActionResult Index()
+        public ActionResult Filtros()
         {
             Filtro filtro = new Filtro();
 

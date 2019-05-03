@@ -8,13 +8,13 @@ namespace CineHitss.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(List<Pelicula> Peliculas)
+        public ActionResult Index()
         {
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
-            Peliculas = context.Peliculas.ToList();
-
+            List<Pelicula> Peliculas = context.Peliculas.ToList();
+            ViewBag.Existep = true;
             return View(Peliculas);
         }
 
