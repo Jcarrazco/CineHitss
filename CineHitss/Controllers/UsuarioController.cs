@@ -12,15 +12,14 @@ namespace CineHitss.Controllers
         public ActionResult Index()
         {
             User xuser = new User();
-            xuser.Username = "Juan";
-            xuser.Email = "juan@globalhitss.com";
-            xuser.Points = 2345;
-           
 
-            Session["Login"] = xuser;
-            User user2 = (User)Session["Login"];
+            var user2 = Session["Login"];
 
+            if (user2 == null)
             ViewBag.login = xuser;
+            
+            else
+            ViewBag.login = user2;
             
             return View();
         }
