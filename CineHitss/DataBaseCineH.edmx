@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataBaseCineHitssModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cartelera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Horario" Type="datetime" Nullable="false" />
+          <Property Name="PeliculaID" Type="int" Nullable="false" />
+          <Property Name="CineID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CiudadID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Generos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CarteleraID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Peliculas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Duracion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Sinopsis" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Costo" Type="int" Nullable="false" />
+          <Property Name="Clasification" Type="varchar" MaxLength="20" />
+          <Property Name="GeneroID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Points" Type="int" />
+        </EntityType>
+        <Association Name="fk_CarteleraID">
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cartelera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="CarteleraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CineID">
+          <End Role="Cines" Type="Self.Cines" Multiplicity="1" />
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cines">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cartelera">
+              <PropertyRef Name="CineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CiudadID">
+          <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+          <End Role="Cines" Type="Self.Cines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cines">
+              <PropertyRef Name="CiudadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneroID">
+          <End Role="Generos" Type="Self.Generos" Multiplicity="1" />
+          <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Peliculas">
+              <PropertyRef Name="GeneroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PeliculaID">
+          <End Role="Peliculas" Type="Self.Peliculas" Multiplicity="1" />
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peliculas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cartelera">
+              <PropertyRef Name="PeliculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseCineHitssModelStoreContainer">
+          <EntitySet Name="Cartelera" EntityType="Self.Cartelera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cines" EntityType="Self.Cines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Generos" EntityType="Self.Generos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peliculas" EntityType="Self.Peliculas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_CarteleraID" Association="Self.fk_CarteleraID">
+            <End Role="Cartelera" EntitySet="Cartelera" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CineID" Association="Self.fk_CineID">
+            <End Role="Cines" EntitySet="Cines" />
+            <End Role="Cartelera" EntitySet="Cartelera" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CiudadID" Association="Self.fk_CiudadID">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Cines" EntitySet="Cines" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneroID" Association="Self.fk_GeneroID">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Peliculas" EntitySet="Peliculas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PeliculaID" Association="Self.fk_PeliculaID">
+            <End Role="Peliculas" EntitySet="Peliculas" />
+            <End Role="Cartelera" EntitySet="Cartelera" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserID" Association="Self.fk_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataBaseCineHitssModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cartelera">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Horario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PeliculaID" Type="Int32" Nullable="false" />
+          <Property Name="CineID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Historials" Relationship="Self.fk_CarteleraID" FromRole="Cartelera" ToRole="Historial" />
+          <NavigationProperty Name="Cine" Relationship="Self.fk_CineID" FromRole="Cartelera" ToRole="Cines" />
+          <NavigationProperty Name="Pelicula" Relationship="Self.fk_PeliculaID" FromRole="Cartelera" ToRole="Peliculas" />
+        </EntityType>
+        <EntityType Name="Cine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CiudadID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carteleras" Relationship="Self.fk_CineID" FromRole="Cines" ToRole="Cartelera" />
+          <NavigationProperty Name="Ciudade" Relationship="Self.fk_CiudadID" FromRole="Cines" ToRole="Ciudades" />
+        </EntityType>
+        <EntityType Name="Ciudade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cines" Relationship="Self.fk_CiudadID" FromRole="Ciudades" ToRole="Cines" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Peliculas" Relationship="Self.fk_GeneroID" FromRole="Generos" ToRole="Peliculas" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CarteleraID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cartelera" Relationship="Self.fk_CarteleraID" FromRole="Historial" ToRole="Cartelera" />
+          <NavigationProperty Name="User" Relationship="Self.fk_UserID" FromRole="Historial" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Pelicula">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Duracion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Sinopsis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo" Type="Int32" Nullable="false" />
+          <Property Name="Clasification" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GeneroID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carteleras" Relationship="Self.fk_PeliculaID" FromRole="Peliculas" ToRole="Cartelera" />
+          <NavigationProperty Name="Genero" Relationship="Self.fk_GeneroID" FromRole="Peliculas" ToRole="Generos" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Points" Type="Int32" />
+          <NavigationProperty Name="Historials" Relationship="Self.fk_UserID" FromRole="Users" ToRole="Historial" />
+        </EntityType>
+        <Association Name="fk_CarteleraID">
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cartelera">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="CarteleraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CineID">
+          <End Role="Cines" Type="Self.Cine" Multiplicity="1" />
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cines">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cartelera">
+              <PropertyRef Name="CineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PeliculaID">
+          <End Role="Peliculas" Type="Self.Pelicula" Multiplicity="1" />
+          <End Role="Cartelera" Type="Self.Cartelera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peliculas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cartelera">
+              <PropertyRef Name="PeliculaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CiudadID">
+          <End Role="Ciudades" Type="Self.Ciudade" Multiplicity="1" />
+          <End Role="Cines" Type="Self.Cine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cines">
+              <PropertyRef Name="CiudadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_GeneroID">
+          <End Role="Generos" Type="Self.Genero" Multiplicity="1" />
+          <End Role="Peliculas" Type="Self.Pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Generos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Peliculas">
+              <PropertyRef Name="GeneroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserID">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataBaseCineHitssEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carteleras" EntityType="Self.Cartelera" />
+          <EntitySet Name="Cines" EntityType="Self.Cine" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudade" />
+          <EntitySet Name="Generos" EntityType="Self.Genero" />
+          <EntitySet Name="Historials" EntityType="Self.Historial" />
+          <EntitySet Name="Peliculas" EntityType="Self.Pelicula" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="fk_CarteleraID" Association="Self.fk_CarteleraID">
+            <End Role="Cartelera" EntitySet="Carteleras" />
+            <End Role="Historial" EntitySet="Historials" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CineID" Association="Self.fk_CineID">
+            <End Role="Cines" EntitySet="Cines" />
+            <End Role="Cartelera" EntitySet="Carteleras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PeliculaID" Association="Self.fk_PeliculaID">
+            <End Role="Peliculas" EntitySet="Peliculas" />
+            <End Role="Cartelera" EntitySet="Carteleras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CiudadID" Association="Self.fk_CiudadID">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Cines" EntitySet="Cines" />
+          </AssociationSet>
+          <AssociationSet Name="fk_GeneroID" Association="Self.fk_GeneroID">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Peliculas" EntitySet="Peliculas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserID" Association="Self.fk_UserID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Historial" EntitySet="Historials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataBaseCineHitssModelStoreContainer" CdmEntityContainer="DataBaseCineHitssEntities">
+          <EntitySetMapping Name="Carteleras">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Cartelera">
+              <MappingFragment StoreEntitySet="Cartelera">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="PeliculaID" ColumnName="PeliculaID" />
+                <ScalarProperty Name="CineID" ColumnName="CineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cines">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Cine">
+              <MappingFragment StoreEntitySet="Cines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudades">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Ciudade">
+              <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Generos">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Genero">
+              <MappingFragment StoreEntitySet="Generos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historials">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Historial">
+              <MappingFragment StoreEntitySet="Historial">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CarteleraID" ColumnName="CarteleraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peliculas">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Pelicula">
+              <MappingFragment StoreEntitySet="Peliculas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Sinopsis" ColumnName="Sinopsis" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Clasification" ColumnName="Clasification" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

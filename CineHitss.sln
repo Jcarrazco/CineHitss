@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineHitss", "CineHitss\CineHitss.csproj", "{8A46983B-FFAA-4C9C-A7B1-9D9DE96AA043}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D} = {B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineHitssApi", "CineHitssApi\CineHitssApi.csproj", "{B5EC4F62-52C6-45DC-BE61-73FEECD32D5D}"
 EndProject

@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <h1>Usuario</h1>
+    <br />
+    <br />
+
+    <label for="Usuario"</label>
+
+    <title>Usuario</title>
+
+</head>
+
+<body>
+
+    <form action="/my-handling-form-page" method="post">
+        <div>
+            <label for="name">Username:</label>
+            <input type="text" id="name" name="user_name" value="@ViewBag.login.Username" readonly/>
+        </div>
+        <br />
+        
+        <br />
+        <div>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail" name="user_email" readonly value="@ViewBag.login.Email"/>
+        </div>
+        <br />
+        <div>
+            <label for="Points">Points:</label>
+            <input type="text" id="Points" name="user_Points" readonly value="@ViewBag.login.Points"></input>
+        </div>
+        <br />
+        <br />
+
+
+    </form>
+    <br />
+
+    <h2>Historial</h2>
+    <ul>
+        @foreach (var item in ViewBag.historia)
+        {
+            <li>@item.nombre - @item.horario</li>
+        }
+    </ul>
+
+    <br />
+
+
+
+</body>
+
+</html>
+
+

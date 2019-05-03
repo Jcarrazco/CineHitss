@@ -12,36 +12,36 @@ namespace CineHitssApi
     [ServiceContract]
     public interface IService1
     {
+        [OperationContract]
+        User GetUser(string _Username);
 
         [OperationContract]
-        string GetData(int value);
+        User LoginUser(string _Username, string _Password);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        string AddPointsUser (int _points, int _UserId);
 
-        // TODO: Add your service operations here
+        [OperationContract]
+        Pelicula GetPelicula(string _peliculaName);
+
+        [OperationContract]
+        IEnumerable<Pelicula> GetPeliculasgen(string _genero);
+
+        [OperationContract]
+        IEnumerable<Pelicula> GetPeliculasClas(string _clasificacion);
+
+        [OperationContract]
+        IEnumerable<Cartelera> GetPeliculasHorario(DateTime _Dia, string _peliculaname);
+
+        [OperationContract]
+        IEnumerable<Cine> GetCinesxCiudad(string _ciudad);
+
+        [OperationContract]
+        IEnumerable<Pelicula> GetPeliculasxCine(string _location);
+
+        [OperationContract]
+        IEnumerable<Cartelera> HorariosPeliculas(string _peliculaname);
+
     }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
-    }
 }

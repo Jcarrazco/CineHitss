@@ -10,8 +10,33 @@ namespace CineHitss.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
+            context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Pelicula> Peliculas = context.Peliculas.ToList();
+            ViewBag.Existep = true;
+            return View(Peliculas);
         }
+
+        public ActionResult Login(string usuario, string contrasenia)
+        {
+            using (CineHitssService.Service1Client client = new CineHitssService.Service1Client())
+            {
+                try
+                {
+                    var _user = client.LoginUser(usuario, contrasenia);
+                    Session["Login"] = _user;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+
+            return RedirectToAction("Index", "Usuario", null);
+        }
+         
 
     }
 }
