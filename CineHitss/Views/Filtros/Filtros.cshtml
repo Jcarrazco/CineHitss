@@ -1,5 +1,18 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model CineHitss.Models.Filtro
 
-
+<div class="row">
+<div class="col-md-4">
+    <h2>Titulo</h2>
+    <p>
+        <select name="menu">
+            <option value="0" selected>(please select:)</option>
+            <option value="1">one</option>
+            <option value="2">two</option>
+            <option value="3">three</option>
+            <option value="other">other, please specify:</option>
+        </select>
+    </p>
+</div>

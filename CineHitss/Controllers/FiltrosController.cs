@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CineHitss.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,14 +10,11 @@ namespace CineHitss.Controllers
     public class FiltrosController : Controller
     {
         // GET: Filtros
-        public ActionResult Index()
+        public ActionResult Filtros()
         {
-            using (var context = new CineHitssProxy())
-            {
-                context.Configuration.LazyLoadingEnabled = false;
-                context.Configuration.ProxyCreationEnabled = false;
-            }
-                return View();
+            Filtro filtro = new Filtro();
+
+            return View(filtro);
         }
     }
 }

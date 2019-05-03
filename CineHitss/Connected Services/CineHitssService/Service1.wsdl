@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:53797/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:53797/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:53797/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CineHitssApi" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_LoginUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_LoginUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddPointsUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPointsUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AddPointsUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPointsUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPelicula_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPelicula" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPelicula_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasgen_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasgen" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasgen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasgenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasClas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasClas" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasClas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasClasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasHorario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasHorario" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasHorario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasHorarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCinesxCiudad_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCinesxCiudad" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCinesxCiudad_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCinesxCiudadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasxCine_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasxCine" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetPeliculasxCine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPeliculasxCineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_HorariosPeliculas_InputMessage">
+    <wsdl:part name="parameters" element="tns:HorariosPeliculas" />
+  </wsdl:message>
+  <wsdl:message name="IService1_HorariosPeliculas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HorariosPeliculasResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetUser" message="tns:IService1_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetUserResponse" message="tns:IService1_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/LoginUser" message="tns:IService1_LoginUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LoginUserResponse" message="tns:IService1_LoginUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPointsUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AddPointsUser" message="tns:IService1_AddPointsUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AddPointsUserResponse" message="tns:IService1_AddPointsUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPelicula">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPelicula" message="tns:IService1_GetPelicula_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPeliculaResponse" message="tns:IService1_GetPelicula_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasgen">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPeliculasgen" message="tns:IService1_GetPeliculasgen_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPeliculasgenResponse" message="tns:IService1_GetPeliculasgen_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasClas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPeliculasClas" message="tns:IService1_GetPeliculasClas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPeliculasClasResponse" message="tns:IService1_GetPeliculasClas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasHorario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPeliculasHorario" message="tns:IService1_GetPeliculasHorario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPeliculasHorarioResponse" message="tns:IService1_GetPeliculasHorario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCinesxCiudad">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCinesxCiudad" message="tns:IService1_GetCinesxCiudad_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCinesxCiudadResponse" message="tns:IService1_GetCinesxCiudad_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasxCine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPeliculasxCine" message="tns:IService1_GetPeliculasxCine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPeliculasxCineResponse" message="tns:IService1_GetPeliculasxCine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HorariosPeliculas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/HorariosPeliculas" message="tns:IService1_HorariosPeliculas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/HorariosPeliculasResponse" message="tns:IService1_HorariosPeliculas_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPointsUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/AddPointsUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPelicula">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPelicula" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasgen">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPeliculasgen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasClas">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPeliculasClas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasHorario">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPeliculasHorario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCinesxCiudad">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCinesxCiudad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPeliculasxCine">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetPeliculasxCine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HorariosPeliculas">
+      <soap:operation soapAction="http://tempuri.org/IService1/HorariosPeliculas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:53797/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

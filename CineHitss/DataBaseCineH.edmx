@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CineHitssModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataBaseCineHitssModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cartelera">
           <Key>
             <PropertyRef Name="id" />
@@ -139,7 +139,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CineHitssModelStoreContainer">
+        <EntityContainer Name="DataBaseCineHitssModelStoreContainer">
           <EntitySet Name="Cartelera" EntityType="Self.Cartelera" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cines" EntityType="Self.Cines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
@@ -172,11 +172,10 @@
             <End Role="Historial" EntitySet="Historial" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CineHitssModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DataBaseCineHitssModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cartelera">
           <Key>
             <PropertyRef Name="id" />
@@ -323,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CineHitssProxy" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DataBaseCineHitssEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carteleras" EntityType="Self.Cartelera" />
           <EntitySet Name="Cines" EntityType="Self.Cine" />
           <EntitySet Name="Ciudades" EntityType="Self.Ciudade" />
@@ -361,9 +360,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CineHitssModelStoreContainer" CdmEntityContainer="CineHitssProxy">
+        <EntityContainerMapping StorageEntityContainer="DataBaseCineHitssModelStoreContainer" CdmEntityContainer="DataBaseCineHitssEntities">
           <EntitySetMapping Name="Carteleras">
-            <EntityTypeMapping TypeName="CineHitssModel.Cartelera">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Cartelera">
               <MappingFragment StoreEntitySet="Cartelera">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Horario" ColumnName="Horario" />
@@ -373,7 +372,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cines">
-            <EntityTypeMapping TypeName="CineHitssModel.Cine">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Cine">
               <MappingFragment StoreEntitySet="Cines">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
@@ -382,7 +381,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ciudades">
-            <EntityTypeMapping TypeName="CineHitssModel.Ciudade">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Ciudade">
               <MappingFragment StoreEntitySet="Ciudades">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -391,7 +390,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Generos">
-            <EntityTypeMapping TypeName="CineHitssModel.Genero">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Genero">
               <MappingFragment StoreEntitySet="Generos">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -399,7 +398,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Historials">
-            <EntityTypeMapping TypeName="CineHitssModel.Historial">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Historial">
               <MappingFragment StoreEntitySet="Historial">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -408,7 +407,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Peliculas">
-            <EntityTypeMapping TypeName="CineHitssModel.Pelicula">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.Pelicula">
               <MappingFragment StoreEntitySet="Peliculas">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -421,7 +420,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="CineHitssModel.User">
+            <EntityTypeMapping TypeName="DataBaseCineHitssModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
