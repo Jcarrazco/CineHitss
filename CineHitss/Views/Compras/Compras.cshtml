@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+   
+        <style>
+            .row {
+                display: grid;
+                grid-template-areas: 'header header header header header header' 'menu main main main main right' 'menu footer footer footer footer footer';
+                grid-gap: 10px;
+                padding: 10px;
+            }
+
+            .column1 {
+                grid-area: right;
+                background-color: skyblue;
+                grid-area: right;
+                text-align: center;
+                padding: 20px 0;
+            }
+
+            .column2 {
+                grid-area: main;
+            }
+        </style>
+    
+
+ 
+    <title>Peliculas</title>
+    <link rel="stylesheet" href="menu_modulos.css">
+<h1>Peliculas</h1>
+<body>
+    <br />
+    <img src="~/Imagenes/pelicula.jpeg" />   <div>
+        aaaa
+    </div>
+   
+      
+
+    <br />
+    <h2>Sinopsis</h2>
+
+    <FORM name="sugerencias" action="http://www.tecnun.es/cgi-bin/ii/CGI0.exe" method="POST" target="resultado">
+        <P>
+
+            <TEXTAREA rows="5" cols="30" name="txtsugerencias"></TEXTAREA><BR>
+            <INPUT type="hidden" name="identificador" value="Z87X09RF"><BR>
+            <INPUT type="submit" value="Comprar">
+        </P>
+    </FORM>
+    <HR>
+
+    <p></p>
+    <p>
+        <i></i>
+        <tt></tt> <i></i> <tt></tt> <i></i>
+        <tt></tt>
+    </p>
+</body>
+</html>
+
+

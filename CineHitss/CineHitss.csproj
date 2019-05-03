@@ -152,6 +152,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\FiltrosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -180,6 +181,7 @@
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Filtro.cs" />
+    <Compile Include="Models\lala.cs" />
     <Compile Include="Pelicula.cs">
       <DependentUpon>DataBaseCineH.tt</DependentUpon>
     </Compile>
@@ -226,6 +228,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\pelicula.jpeg" />
+    <Content Include="Images\1.jpg" />
+    <Content Include="Images\10.jpg" />
+    <Content Include="Images\2.jpg" />
+    <Content Include="Images\3.jpg" />
+    <Content Include="Images\4.jpg" />
+    <Content Include="Images\5.jpg" />
+    <Content Include="Images\6.jpg" />
+    <Content Include="Images\7.jpg" />
+    <Content Include="Images\8.jpg" />
+    <Content Include="Images\9.jpg" />
     <Content Include="Images\palomitas.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -271,6 +284,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Filtros\Filtros.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Compras\Compras.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,6 +310,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CineHitssService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CineHitssApi\CineHitssApi.csproj">
+      <Project>{b5ec4f62-52c6-45dc-be61-73feecd32d5d}</Project>
+      <Name>CineHitssApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
