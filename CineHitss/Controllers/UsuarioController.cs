@@ -13,6 +13,11 @@ namespace CineHitss.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
+            if (Session["Login"] != null)
+            {
+                CineHitssService.User User = (CineHitssService.User)Session["Login"];
+                ViewBag.User = User.Username;
+            }
 
             var context = new DataBaseCineHitssEntities();
             IEnumerable<Historial> hist = new List<Historial>();
@@ -29,7 +34,6 @@ namespace CineHitss.Controllers
             if (user2 == null)
             {
                 ViewBag.login = xuser;
-               
             }
             else
             { 

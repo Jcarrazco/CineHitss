@@ -285,6 +285,7 @@
     <Content Include="Views\Filtros\Filtros.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Compras\Compras.cshtml" />
+    <Content Include="Views\Compras\ComprasRegistrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

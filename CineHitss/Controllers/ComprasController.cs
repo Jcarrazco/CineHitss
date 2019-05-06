@@ -11,8 +11,29 @@ namespace CineHitss.Controllers
         // GET: Compras
         public ActionResult Compras(string Movieid)
         {
-            ViewBag.MId = Movieid;
-            return View();
+            if (Session["Login"] != null)
+            {
+                CineHitssService.User User = (CineHitssService.User)Session["Login"];
+                ViewBag.User = User.Username;
+            }
+
+            int ID = Convert.ToInt32(Movieid);
+            DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
+            context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.ProxyCreationEnabled = false;
+
+            Pelicula pelicula = context.Peliculas.First(p => p.id == ID);
+            Genero genero = context.Generos.First(g => g.id == pelicula.GeneroID);
+
+            ViewBag.Gen = genero.Nombre;
+            ViewBag.MId = pelicula.id;
+            return View(pelicula);
+        }
+
+        public ActionResult ComprasRegistrar()
+        {
+            Pelicula pelicula = new Pelicula();
+            return View(pelicula);
         }
     }
 }
