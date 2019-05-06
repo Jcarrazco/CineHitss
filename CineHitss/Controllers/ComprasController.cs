@@ -28,5 +28,11 @@ namespace CineHitss.Controllers
             ViewBag.MId = pelicula.id;
             return View(pelicula);
         }
+
+        public ActionResult ComprasRegistrar()
+        {
+            Pelicula pelicula = new Pelicula();
+            return View(pelicula);
+        }
     }
 }
