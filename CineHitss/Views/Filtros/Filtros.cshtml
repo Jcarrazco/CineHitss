@@ -1,90 +1,145 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model CineHitss.Models.Filtro
 
-<div class="col-lg-8">
-    aqui va la tabla 
-   
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
 
-</div>
-    <div class="col-lg-4">
+<body>
+    <form action="~/Filtros/Filtros" method="post">
         <div class="col-md-4" style="margin-right:70px">
-            <h2>Titulo</h2>
+            <h2>Estado</h2>
             <p>
-                <select name="menu">
-                    <option value="0" selected>(please select:)</option>
-                    <option value="1">one</option>
-                    <option value="2">two</option>
-                    <option value="3">three</option>
-                    <option value="other">other, please specify:</option>
+                <select name="Estado" id="Estado" required>
+                    <option value="Select">Selecciona un Estado</option>
                 </select>
             </p>
 
         </div>
 
+
         <div class="col-md-4">
             <div class="col-md-4" style="margin-right:70px">
                 <h2>Ciudad</h2>
                 <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
+                    <select name="Ciudad" id="Ciudad" disabled>
+                        <option value="Select" disabled>Selecciona una Ciudad</option>
                     </select>
                 </p>
             </div>
 
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-4" style="margin-right:70px">
-                    <h2>Cine</h2>
-                    <p>
-                        <select name="menu">
-                            <option value="0" selected>(please select:)</option>
-                            <option value="1">one</option>
-                            <option value="2">two</option>
-                            <option value="3">three</option>
-                            <option value="other">other, please specify:</option>
-                        </select>
-                    </p>
-
-
-
-
-
-
-                </div>
-                
-                
-            </div>
-
-
-            <div class="col-md-4">
-                <h2>Pelicula</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-4" style="margin-right:70px">
+                <h2>Cine</h2>
                 <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
-                    </select>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Genero</h2>
-                <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
+                    <select name="Cine" id="Cine" disabled>
+                        <option value="Select" disabled>Selecciona un cine</option>
                     </select>
                 </p>
             </div>
         </div>
 
+        <div class="col-md-4">
+            <h2>Genero</h2>
+            <p>
+                <select name="Genero" id="Genero" disabled>
+                    <option value="Select" disabled>Selecciona un Genero</option>
+                </select>
+            </p>
+        </div>
+        <div class="col-md-4">
+            <input type="submit" name="Btn_Filtrar" id="Btn_Filtrar" disabled />
+        </div>
+            
+    </form>
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+             url: "@Url.Action("GetEstados")",
+             type: "POST",
+             contentType: "application/json",
+             success: function (results) {
+                var s = '<option value="-1">Seleccione un estado</option>';
+                for (var i = 0; i < results.length; i++) {
+                    s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                 }
+                 $()
+                $("#Estado").html(s); 
+             },
+             error: function (e) {
+                alert("Algo fallo en su peticion");
+             }
+             });
+
+
+            $("#Estado").change(function () {
+                var EstadoSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetCiudades/?Estado=' + EstadoSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione una ciudad</option>';
+                    for (var i = 0; i < results.length; i++) {
+                        s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#Ciudad").attr("disabled", false); 
+                        $("#Ciudad").html(s); 
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                    });
+            });
+
+            $("#Ciudad").change(function () {
+                var CiudadSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetCine/?_Ciudad=' + CiudadSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione un cine</option>';
+                        for (var i = 0; i < results.length; i++) {
+                            s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#Cine").attr("disabled", false); 
+                        $("#Cine").html(s);
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                });
+            });
+
+            $("#Cine").change(function () {
+                var CiudadSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetGeneros/?_cine=' + CiudadSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione un cine</option>';
+                        for (var i = 0; i < results.length; i++) {
+                            s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#Genero").attr("disabled", false);
+                        $("#Btn_Filtrar").attr("disabled", false);
+                        $("#Genero").html(s);
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
