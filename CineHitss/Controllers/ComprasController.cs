@@ -21,11 +21,18 @@ namespace CineHitss.Controllers
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
+
             Pelicula pelicula = context.Peliculas.First(p => p.id == ID);
             Genero genero = context.Generos.First(g => g.id == pelicula.GeneroID);
 
             ViewBag.Gen = genero.Nombre;
             ViewBag.MId = pelicula.id;
+            return View(pelicula);
+        }
+
+        public ActionResult ComprasRegistrar()
+        {
+            Pelicula pelicula = new Pelicula();
             return View(pelicula);
         }
     }
