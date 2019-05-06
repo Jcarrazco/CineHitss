@@ -26,7 +26,7 @@
     <form action="/my-handling-form-page" method="post">
         <div>
             <label for="name">Username:</label>
-            <input type="text" id="name" name="user_name" value="@ViewBag.login.Username" readonly/>
+            <input type="text" id="name" name="user_name" value="@ViewBag.login.Username" readonly />
         </div>
         <br />
         
@@ -38,7 +38,7 @@
         <br />
         <div>
             <label for="Points">Points:</label>
-            <input type="text" id="Points" name="user_Points" readonly value="@ViewBag.login.Points"></input>
+            <input type="text" id="Points" name="user_Points" readonly value="@ViewBag.login.Points" />
         </div>
         <br />
         <br />
@@ -48,10 +48,17 @@
     <br />
 
     <h2>Historial</h2>
+
     <ul>
         @foreach (var item in ViewBag.historia)
         {
-            <li>@item.nombre - @item.horario</li>
+
+        <textarea id="TextArea1" rows="6" cols="25">
+
+                @item.nombre - @item.horario
+
+        </textarea>
+            
         }
     </ul>
 
