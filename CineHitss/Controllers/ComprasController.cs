@@ -9,8 +9,9 @@ namespace CineHitss.Controllers
     public class ComprasController : Controller
     {
         // GET: Compras
-        public ActionResult Compras()
+        public ActionResult Compras(string Movieid)
         {
+            ViewBag.MId = Movieid;
             return View();
         }
     }
