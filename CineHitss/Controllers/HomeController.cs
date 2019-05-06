@@ -10,6 +10,12 @@ namespace CineHitss.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["Login"] != null)
+            {
+                CineHitssService.User User = (CineHitssService.User)Session["Login"];
+                ViewBag.User = User.Username;
+            }
+
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
             context.Configuration.ProxyCreationEnabled = false;
@@ -26,6 +32,7 @@ namespace CineHitss.Controllers
                 {
                     var _user = client.LoginUser(usuario, contrasenia);
                     Session["Login"] = _user;
+                    ViewBag.User = _user.Username;
                 }
                 catch (Exception ex)
                 {

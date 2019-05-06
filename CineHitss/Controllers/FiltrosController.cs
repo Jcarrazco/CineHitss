@@ -1,4 +1,5 @@
-﻿using CineHitss.Models;
+﻿using CineHitss.CineHitssService;
+using CineHitss.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,13 @@ namespace CineHitss.Controllers
         // GET: Filtros
         public ActionResult Filtros()
         {
-            Filtro filtro = new Filtro();
+            if (Session["Login"] != null)
+            {
+                CineHitssService.User User = (CineHitssService.User)Session["Login"];
+                ViewBag.User = User.Username;
+            }
 
+            Filtro filtro = new Filtro();
             return View(filtro);
         }
     }
