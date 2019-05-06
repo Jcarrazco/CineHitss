@@ -18,9 +18,14 @@ namespace CineHitss.Controllers
                 CineHitssService.User User = (CineHitssService.User)Session["Login"];
                 ViewBag.User = User.Username;
             }
-
-            Filtro filtro = new Filtro();
-            return View(filtro);
+            DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
+            context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Pelicula> Peliculas = context.Peliculas.ToList();
+            ViewBag.Existep = true;
+            return View(Peliculas);
         }
+        
+            
     }
 }

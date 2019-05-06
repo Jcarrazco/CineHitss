@@ -1,90 +1,124 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model CineHitss.Models.Filtro
+@model List<CineHitss.Pelicula>
 
-<div class="col-lg-8">
-    aqui va la tabla 
-   
 
-</div>
-    <div class="col-lg-4">
-        <div class="col-md-4" style="margin-right:70px">
-            <h2>Titulo</h2>
+<html>
+<head>
+    <style>
+        .rowpelicula {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+            .rowpelicula > div {
+                border: 1px solid black;
+                text-align: center;
+                font-size: 30px;
+                background-color: cadetblue;
+            }
+
+        .row {
+            display: grid;
+            grid-template-areas: 'header header header header header header' 'menu main main main main right' 'menu footer footer footer footer footer';
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .column1 {
+            grid-area: right;
+            background-color: skyblue;
+            grid-area: right;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .column2 {
+            grid-area: main;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cine hitss</h1>
+
+    <br />
+    <div class="row">
+        <div class="column1">
+            <h2> Titulo</h2>
             <p>
                 <select name="menu">
-                    <option value="0" selected>(please select:)</option>
-                    <option value="1">one</option>
-                    <option value="2">two</option>
-                    <option value="3">three</option>
-                    <option value="other">other, please specify:</option>
+                    <option value="0" selected> (please select:)</option>
+                    <option value="1"> one</option>
+                    <option value="2"> two</option>
+                    <option value="3"> three</option>
+                    <option value="other"> other, please specify:</option>
                 </select>
             </p>
 
+            <h2> Ciudad</h2>
+            <p>
+                <select name="ciudad" id="ciudad">
+                    <option value="0" selected> (please select:)</option>
+                    <option value="1"> one</option>
+                    <option value="2"> two</option>
+                    <option value="3"> three</option>
+                    <option value="other"> other, please specify:</option>
+                </select>
+            </p>
+
+            <h2> Cine</h2>
+            <p>
+                <select name="cine" id=" cine">
+                    <option value="0" selected> (please select:)</option>
+                    <option value="1"> one</option>
+                    <option value="2"> two</option>
+                    <option value="3"> three</option>
+                    <option value="other"> other, please specify:</option>
+                </select>
+            </p>
+
+            <h2> Genero</h2>
+            <p>
+                <select name="genero" id="genero">
+                    <option value="0" selected> (please select:)</option>
+                    <option value="1"> one</option>
+                    <option value="2"> two</option>
+                    <option value="3"> three</option>
+                    <option value="other"> other, please specify:</option>
+                </select>
+            </p>
+
+            <input type="button" class="btn btn-danger"
+                   value="Aplicar"
+                   onclick="" />
+
         </div>
 
-        <div class="col-md-4">
-            <div class="col-md-4" style="margin-right:70px">
-                <h2>Ciudad</h2>
-                <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
-                    </select>
-                </p>
-            </div>
-
-            </div>
-            <div class="col-md-4">
-                <div class="col-md-4" style="margin-right:70px">
-                    <h2>Cine</h2>
-                    <p>
-                        <select name="menu">
-                            <option value="0" selected>(please select:)</option>
-                            <option value="1">one</option>
-                            <option value="2">two</option>
-                            <option value="3">three</option>
-                            <option value="other">other, please specify:</option>
-                        </select>
-                    </p>
-
-
-
-
-
-
+        <div class="column2">
+            @using (Html.BeginForm("Filtros", "Filtros"))
+            {
+                <div class="rowpelicula">
+                    @if (ViewBag.Existep)
+                    {
+                        foreach (Pelicula p in Model)
+                        {
+                            <div>
+                                <h2>@p.Nombre</h2> <br />
+                                <a href="~/Compras/Compras?Movieid=@p.id">
+                                    <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;">
+                                </a>
+                            </div>
+                        }
+                    }
                 </div>
-                
-                
-            </div>
-
-
-            <div class="col-md-4">
-                <h2>Pelicula</h2>
-                <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
-                    </select>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Genero</h2>
-                <p>
-                    <select name="menu">
-                        <option value="0" selected>(please select:)</option>
-                        <option value="1">one</option>
-                        <option value="2">two</option>
-                        <option value="3">three</option>
-                        <option value="other">other, please specify:</option>
-                    </select>
-                </p>
-            </div>
+            }
         </div>
 
+    </div>
+    
+    
+</body>
+</html>
