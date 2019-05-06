@@ -6,6 +6,7 @@
 
 <html>
 <head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <style>
         .rowpelicula {
             display: grid;
@@ -47,54 +48,38 @@
     <br />
     <div class="row">
         <div class="column1">
-            <h2> Titulo</h2>
-            <p>
-                <select name="menu">
-                    <option value="0" selected> (please select:)</option>
-                    <option value="1"> one</option>
-                    <option value="2"> two</option>
-                    <option value="3"> three</option>
-                    <option value="other"> other, please specify:</option>
-                </select>
-            </p>
+            <form  action="~/Filtros/Filtros" method="post">
+                <h2> Estado</h2>
+                <p>
+                    <select name="Estado" id="Estado" required>
+                        <option value="Select">Selecciona un Estado</option>
+                    </select>
+                </p>
 
-            <h2> Ciudad</h2>
-            <p>
-                <select name="ciudad" id="ciudad">
-                    <option value="0" selected> (please select:)</option>
-                    <option value="1"> one</option>
-                    <option value="2"> two</option>
-                    <option value="3"> three</option>
-                    <option value="other"> other, please specify:</option>
-                </select>
-            </p>
+                <h2> Ciudad</h2>
+                <p>
+                    <select name="ciudad" id="ciudad" disabled required>
+                        <option value="Select">Selecciona un Estado</option>
+                    </select>
+                </p>
 
-            <h2> Cine</h2>
-            <p>
-                <select name="cine" id=" cine">
-                    <option value="0" selected> (please select:)</option>
-                    <option value="1"> one</option>
-                    <option value="2"> two</option>
-                    <option value="3"> three</option>
-                    <option value="other"> other, please specify:</option>
-                </select>
-            </p>
+                <h2> Cine</h2>
+                <p>
+                    <select name="cine" id="cine" disabled required>
+                        <option value="Select">Selecciona un Estado</option>
+                    </select>
+                </p>
 
-            <h2> Genero</h2>
-            <p>
-                <select name="genero" id="genero">
-                    <option value="0" selected> (please select:)</option>
-                    <option value="1"> one</option>
-                    <option value="2"> two</option>
-                    <option value="3"> three</option>
-                    <option value="other"> other, please specify:</option>
-                </select>
-            </p>
+                <h2> Genero</h2>
+                <p>
+                    <select name="genero" id="genero">
+                        <option value="Select">Selecciona un Estado</option>
+                    </select>
+                </p>
 
-            <input type="button" class="btn btn-danger"
-                   value="Aplicar"
-                   onclick="" />
-
+                <input type="submit" class="btn btn-danger" name="Btn_Filtrar" id="Btn_Filtrar"
+                       value="Aplicar" disabled/>
+            </form>
         </div>
 
         <div class="column2">
@@ -105,12 +90,18 @@
                     {
                         foreach (Pelicula p in Model)
                         {
-                            <div>
-                                <h2>@p.Nombre</h2> <br />
-                                <a href="~/Compras/Compras?Movieid=@p.id">
-                                    <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;">
-                                </a>
-                            </div>
+                    <div>
+                        <h2>@p.Nombre</h2> <br />
+                        @if (ViewBag.Filtrado)
+                        {
+                            <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;" id="@p.id" onClick="imgclick()">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;">
+                        }
+
+                    </div>
                         }
                     }
                 </div>
@@ -118,7 +109,96 @@
         </div>
 
     </div>
-    
-    
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+             url: "@Url.Action("GetEstados")",
+             type: "POST",
+             contentType: "application/json",
+             success: function (results) {
+                var s = '<option value="-1">Seleccione un estado</option>';
+                for (var i = 0; i < results.length; i++) {
+                    s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                 }
+                 $()
+                $("#Estado").html(s);
+             },
+             error: function (e) {
+                alert("Algo fallo en su peticion");
+             }
+             });
+
+
+            $("#Estado").change(function () {
+                var EstadoSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetCiudades/?Estado=' + EstadoSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione una ciudad</option>';
+                    for (var i = 0; i < results.length; i++) {
+                        s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#ciudad").attr("disabled", false);
+                        $("#ciudad").html(s);
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                    });
+            });
+
+            $("#ciudad").change(function () {
+                var CiudadSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetCine/?_Ciudad=' + CiudadSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione un cine</option>';
+                        for (var i = 0; i < results.length; i++) {
+                            s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#cine").attr("disabled", false);
+                        $("#cine").html(s);
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                });
+            });
+
+            $("#cine").change(function () {
+                var CiudadSelec = $(this).children("option:selected").val();
+                $.ajax({
+                    url: '/Filtros/GetGeneros/?_cine=' + CiudadSelec,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (results) {
+                        var s = '<option value="-1">Seleccione un cine</option>';
+                        for (var i = 0; i < results.length; i++) {
+                            s += '<option value="' + results[i] + '">' + results[i] + '</option>';
+                        }
+                        $("#genero").attr("disabled", false);
+                        $("#Btn_Filtrar").attr("disabled", false);
+                        $("#genero").html(s);
+                    },
+                    error: function (e) {
+                        alert("Algo fallo en su peticion");
+                    }
+                });
+            });
+
+            
+        });
+
+        function imgclick() {
+            alert(this.id);
+        }
+    </script>
+
 </body>
 </html>

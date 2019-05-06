@@ -18,7 +18,13 @@ namespace CineHitss.Controllers
                 CineHitssService.User User = (CineHitssService.User)Session["Login"];
                 ViewBag.User = User.Username;
             }
-            return View();
+            DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
+            context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Pelicula> Peliculas = context.Peliculas.ToList();
+            ViewBag.Existep = true;
+            ViewBag.Filtrado = false;
+            return View(Peliculas);
         }
 
         /// <summary>
@@ -28,13 +34,14 @@ namespace CineHitss.Controllers
         /// <param name="Genero"></param>
         /// <returns>regresa la vista con las peliculas actualizadas</returns>
         [HttpPost]
-        public ActionResult Filtros(string Cine, string Genero)
+        public ActionResult Filtros(string cine, string genero)
         {
             if (Session["Login"] != null)
             {
                 CineHitssService.User User = (CineHitssService.User)Session["Login"];
                 ViewBag.User = User.Username;
             }
+            
 
             DataBaseCineHitssEntities context = new DataBaseCineHitssEntities();
             context.Configuration.LazyLoadingEnabled = false;
@@ -43,21 +50,22 @@ namespace CineHitss.Controllers
             List<Pelicula> pelics = new List<Pelicula>();
 
             //Filtra por cine las peliculas que existan
-            if (!String.IsNullOrEmpty(Cine))
+            if (!String.IsNullOrEmpty(cine))
             {
-                Cine _cine = context.Cines.First(cc => cc.Location == Cine);
+                Cine _cine = context.Cines.First(cc => cc.Location == cine);
                 List<Cartelera> cartelera = context.Carteleras.Where(c => c.CineID == _cine.id).ToList();
                 foreach(Cartelera car in cartelera)
                 {
                     pelics.Add(context.Peliculas.First(p => p.id == car.PeliculaID));
                 }
             }
-
+            ViewBag.Existep = true;
+            ViewBag.Filtrado = true;
             //Filtra por genero las peliculas que esten en el cine si es que se aplico el filtro
-            if (!String.IsNullOrEmpty(Genero) && Genero != "-1")
+            if (!String.IsNullOrEmpty(genero) && genero != "-1")
             {
                 List<Pelicula> GenPeliculas = new List<Pelicula>();
-                Genero gener = context.Generos.First(g => g.Nombre == Genero);
+                Genero gener = context.Generos.First(g => g.Nombre == genero);
                 foreach (Pelicula pel in pelics)
                 {
                     if (pel.GeneroID == gener.id)
