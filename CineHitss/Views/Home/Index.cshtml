@@ -22,7 +22,9 @@
 
         .row {
             display: grid;
-            grid-template-areas: 'header header header header header header' 'menu main main main main right' 'menu footer footer footer footer footer';
+            grid-template-areas: 'header header header header header header' 
+                                 'menu main main main main right' 
+                                 'menu footer footer footer footer footer';
             grid-gap: 10px;
             padding: 10px;
         }
@@ -72,7 +74,7 @@
                         {
                             <div>
                                 <h2>@p.Nombre</h2> <br />
-                                <a href="~/Usuario/Index?var=@p.Nombre">
+                                <a href="~/Compras/Compras?Movieid=@p.id">
                                     <img src="@Url.Content("~/Images/" + p.id + ".jpg" )" style="width:160px;height:270px;border:0;">
                                 </a>
                             </div>

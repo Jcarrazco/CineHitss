@@ -14,24 +14,24 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
-
                 </button>
                 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Peliculas", "Index", "Home")</li>
                     <li>@Html.ActionLink("Usuario", "Index", "Usuario")</li>
                     <li>@Html.ActionLink("Filtros", "Filtros", "Filtros")</li>
                 </ul>
             </div>
+            <div class="navbar-right" style="color:blanchedalmond; font-size:medium">Bienvenido a CineHitss  @ViewBag.User</div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year CineHitss WebAplication</p>
         </footer>
     </div>
 

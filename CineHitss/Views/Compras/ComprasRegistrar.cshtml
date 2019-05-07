@@ -1,11 +1,14 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @model CineHitss.Pelicula
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<head>
+<head> 
+
+   
     <title>Peliculas</title>
     <style>
         .rowpelicula {
@@ -19,14 +22,14 @@
                 border: 1px solid black;
                 text-align: center;
                 font-size: 30px;
-                background-color:lightseagreen;
+                background-color: lightseagreen;
             }
     </style>
+</head>
+
+<body>
 
     
-</head>
-    
-<body>
     <div class="rowpelicula">
         <div>
             <link rel="stylesheet" href="menu_modulos.css">
@@ -44,12 +47,26 @@
         </div>
     </div>
 
-    <FORM name="Comprabtn" action="@Url.Action("Filtros","Filtros")" method="get">
+
+    <FORM name="Comprabtn" action="" method="POST">
         <div class="rowpelicula">
-            <INPUT type="submit" value="Comprar" class="btn btn-danger" style="height: 80px">
+            <INPUT type="button" onclick="mensajes()" value="Comprar" class="btn btn-danger" style="height: 80px">
         </div>
     </FORM>
+
+    <script>
+        function mensajes() {
+            var mensaje = confirm("Gracias por su compra")
+           
+            ViewBag.mensajes.(alert);
+
+           
+
+        }
+    </script>
+
 </body>
 </html>
+
 
 
